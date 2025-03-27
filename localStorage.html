@@ -1,0 +1,24 @@
+<script>
+ // SET
+
+ localStorage.setItem("age", "45");
+ localStorage.setItem("user", { name: "Julio", lastName: "Avantt" });
+ localStorage.setItem(
+  "userOk",
+  JSON.stringify({ name: "Julio", lastName: "Avantt" })
+ );
+
+ // GET
+
+ console.log("age", localStorage.getItem("age"));
+ console.log("user", localStorage.getItem("user"));
+ console.log("userOk", localStorage.getItem("userOk"));
+ console.log("userOk parseado", JSON.parse(localStorage.getItem("userOk")));
+
+ // REMOVE
+ /* localStorage.removeItem("user");
+ console.log("user", localStorage.getItem("user")); */
+
+ // CLEAR
+ localStorage.clear();
+</script>
