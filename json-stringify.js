@@ -5,4 +5,5 @@ const user = {
 };
 
 const stringJSON = JSON.stringify(user);
-console.log(JSON.parse(stringJSON));
+
+console.log(stringJSON);

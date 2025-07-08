@@ -4,4 +4,8 @@ const user = {
  ciudad: "Madrid",
 };
 
-console.log(JSON.stringify(user));
+const stringJSON = JSON.stringify(user);
+
+console.log(stringJSON);
+
+console.log(JSON.parse(stringJSON));
