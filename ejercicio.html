@@ -7,6 +7,9 @@
  </head>
  <body>
   <script>
+   const style =
+    "background-color: black; color: violet; font-family: 'Press Start 2P', system-ui; border: 10px solid violet; font-size: 2em;";
+
    class CuentaBancaria {
     constructor(cedula, saldo = 0) {
      this.cedula = cedula;
@@ -46,47 +49,54 @@
     }
    }
 
-   let cliente;
-   const style =
-    "background-color: black; color: violet; font-family: 'Press Start 2P', system-ui; border: 10px solid violet; font-size: 2em;";
+   function main() {
+    let cliente;
 
-   if (localStorage.getItem("cedula")) {
-    cliente = new CuentaBancaria(
-     localStorage.getItem("cedula"),
-     Number(localStorage.getItem("saldo"))
-    );
-   } else {
-    let cedula = prompt("Ingrese cédula");
-    localStorage.setItem("cedula", cedula);
-    let inicial = prompt("Ingrese su dinero imaginario");
-    cliente = new CuentaBancaria(cedula, Number(inicial));
-   }
+    if (localStorage.getItem("cedula")) {
+     cliente = new CuentaBancaria(
+      localStorage.getItem("cedula"),
+      Number(localStorage.getItem("saldo"))
+     );
+    } else {
+     let cedula = prompt("Ingrese cédula");
+     localStorage.setItem("cedula", cedula);
+     let nombre = prompt("Ingrese nombre");
+     localStorage.setItem("nombre", nombre);
+     let inicial = prompt("Ingrese su dinero imaginario");
+     cliente = new CuentaBancaria(cedula, Number(inicial));
+    }
 
-   let operacion = prompt(`Ingrese operación:
+    let operacion = prompt(`Hola ${localStorage.getItem(
+     "nombre"
+    )}, ingrese operación:
 
       1 - 💵 ver saldo.
       2 - 🐖 depositar.
       3 - ⛔ retirar.
-      4 - 🏦 salir.`);
+      4 - 🏦 salir.      
+      `);
 
-   switch (operacion) {
-    case "1":
-     cliente.verSaldo();
-     break;
-    case "2":
-     let montoDeposito = prompt("Monto a depositar");
-     cliente.depositar(Number(montoDeposito));
-     break;
-    case "3":
-     let montoRetiro = prompt("Monto a retirar");
-     cliente.retirar(Number(montoRetiro));
-     break;
-    case "4":
-     cliente.salir();
-     break;
-    default:
-     console.log("%cProblemas con la ley llame a Saul Goodman!", style);
+    switch (operacion) {
+     case "1":
+      cliente.verSaldo();
+      break;
+     case "2":
+      let montoDeposito = prompt("Monto a depositar");
+      cliente.depositar(Number(montoDeposito));
+      break;
+     case "3":
+      let montoRetiro = prompt("Monto a retirar");
+      cliente.retirar(Number(montoRetiro));
+      break;
+     case "4":
+      cliente.salir();
+      break;
+     default:
+      console.log("%cProblemas con la ley llame a Saul Goodman!", style);
+    }
    }
+
+   main();
   </script>
  </body>
 </html>
