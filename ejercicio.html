@@ -14,7 +14,10 @@
     }
 
     verSaldo() {
-     console.log(`Wey con cédula ${this.cedula}, tu saldo es $${this.saldo}`);
+     console.log(
+      `%cWey con cédula ${this.cedula}, tu saldo es $${this.saldo}`,
+      style
+     );
     }
 
     depositar(monto) {
@@ -29,13 +32,23 @@
       this.saldo -= monto;
       localStorage.setItem("saldo", this.saldo);
       console.log(
-       `Wey con cédula ${this.cedula}, tu saldo es ${this.saldo} aflojale a las compras`
+       `%cWey con cédula ${this.cedula}, tu saldo es ${this.saldo} aflojale a las compras`,
+       style
       );
      }
+    }
+    salir() {
+     localStorage.clear();
+     console.log(
+      "%cHa cerrado sesión, un gusto hacernos ricos con su dinero!",
+      style
+     );
     }
    }
 
    let cliente;
+   const style =
+    "background-color: darkblue; color: white; font-style: italic; border: 5px solid hotpink; font-size: 2em;";
 
    if (localStorage.getItem("cedula")) {
     cliente = new CuentaBancaria(
@@ -50,10 +63,11 @@
    }
 
    let operacion = prompt(`Ingrese operación:
-   
-   1 - 💵 ver saldo.
-   2 - 🐖 depositar.
-   3 - ⛔ retirar.`);
+
+      1 - 💵 ver saldo.
+      2 - 🐖 depositar.
+      3 - ⛔ retirar.
+      4 - 🏦 salir.`);
 
    switch (operacion) {
     case "1":
@@ -67,8 +81,11 @@
      let montoRetiro = prompt("Monto a retirar");
      cliente.retirar(Number(montoRetiro));
      break;
+    case "4":
+     cliente.salir();
+     break;
     default:
-     console.log("Problemas con la ley llame a Saul Goodman!");
+     console.log("%cProblemas con la ley llame a Saul Goodman!", style);
    }
   </script>
  </body>
