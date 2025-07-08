@@ -28,6 +28,7 @@
      localStorage.setItem("saldo", this.saldo);
      this.verSaldo();
     }
+    
     retirar(monto) {
      if (monto > this.saldo) {
       document.body.innerHTML = "<img src='./1.png' />";
@@ -50,20 +51,21 @@
    }
 
    function main() {
-    let cliente;
+    let cuenta;
 
     if (localStorage.getItem("cedula")) {
-     cliente = new CuentaBancaria(
-      localStorage.getItem("cedula"),
+     cuenta = new CuentaBancaria(
+      localStorage.getItem("nombre"),
       Number(localStorage.getItem("saldo"))
      );
     } else {
-     let cedula = prompt("Ingrese cédula");
+     let cedula = Number(prompt("Ingrese identificación"));
      localStorage.setItem("cedula", cedula);
      let nombre = prompt("Ingrese nombre");
      localStorage.setItem("nombre", nombre);
-     let inicial = prompt("Ingrese su dinero imaginario");
-     cliente = new CuentaBancaria(cedula, Number(inicial));
+     let saldo = Number(prompt("Ingrese saldo"));
+     localStorage.setItem("saldo", saldo);
+     cuenta = new CuentaBancaria(nombre, saldo);
     }
 
     let operacion = prompt(`Hola ${localStorage.getItem(
@@ -78,18 +80,18 @@
 
     switch (operacion) {
      case "1":
-      cliente.verSaldo();
+      cuenta.verSaldo();
       break;
      case "2":
       let montoDeposito = prompt("Monto a depositar");
-      cliente.depositar(Number(montoDeposito));
+      cuenta.depositar(Number(montoDeposito));
       break;
      case "3":
       let montoRetiro = prompt("Monto a retirar");
-      cliente.retirar(Number(montoRetiro));
+      cuenta.retirar(Number(montoRetiro));
       break;
      case "4":
-      cliente.salir();
+      cuenta.salir();
       break;
      default:
       console.log("%cProblemas con la ley llame a Saul Goodman!", style);

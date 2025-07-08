@@ -1,0 +1,73 @@
+<script>
+ class CuentaBancaria {
+  constructor(titular, saldo = 0) {
+   this.titular = titular;
+   this.saldo = saldo;
+  }
+  depositar(monto) {
+   this.saldo += monto;
+   console.log("Saldo actual: " + this.saldo);
+  }
+  retirar(monto) {
+   if (this.saldo >= monto) {
+    this.saldo -= monto;
+    console.log("Saldo actual: " + this.saldo);
+   } else {
+    console.log("Estás pobre");
+   }
+  }
+  verSaldo() {
+   console.log("Saldo actual: " + this.saldo);
+  }
+ }
+
+ function main() {
+  let cuenta;
+
+  if (!localStorage.getItem("cedula")) {
+   let cedula = Number(prompt("Ingrese identificación"));
+   localStorage.setItem("cedula", cedula);
+   let nombre = prompt("Ingrese nombre");
+   localStorage.setItem("nombre", nombre);
+   let saldo = Number(prompt("Ingrese saldo"));
+   localStorage.setItem("saldo", saldo);
+   cuenta = new CuentaBancaria(nombre, saldo);
+  } else {
+   cuenta = new CuentaBancaria(
+    localStorage.getItem("nombre"),
+    Number(localStorage.getItem("saldo"))
+   );
+  }
+
+  let operacion = prompt(`Hola ${localStorage.getItem(
+   "nombre"
+  )}, ingrese operación:
+
+      1 - 💵 ver saldo.
+      2 - 🐖 depositar.
+      3 - ⛔ retirar.
+      4 - 🏦 salir.      
+      `);
+
+  switch (operacion) {
+   case "1":
+    cliente.verSaldo();
+    break;
+   case "2":
+    let montoDeposito = prompt("Monto a depositar");
+    cliente.depositar(Number(montoDeposito));
+    break;
+   case "3":
+    let montoRetiro = prompt("Monto a retirar");
+    cliente.retirar(Number(montoRetiro));
+    break;
+   case "4":
+    cliente.salir();
+    break;
+   default:
+    console.log("%cProblemas con la ley llame a Saul Goodman!", style);
+  }
+ }
+
+ main();
+</script>
